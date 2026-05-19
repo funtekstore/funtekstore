@@ -157,7 +157,7 @@ function Catalogo({ agregarAlCarrito, productosIniciales }) {
         justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100,
         boxShadow: "0 1px 12px rgba(0,0,0,0.04)"
       }}>
-        <img src="/logo.svg" alt="FunTech" style={{ height: "60px", cursor: "pointer" }} onClick={() => navigate("/")} />
+        <img src="/logo.svg" alt="Funtek" style={{ height: "60px", cursor: "pointer" }} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <button onClick={() => navigate("/")}
             style={{
@@ -654,7 +654,7 @@ function Catalogo({ agregarAlCarrito, productosIniciales }) {
       <footer className="footer">
         <div className="footer-inner">
           <div className="footer-brand">
-            <img src="/logo.png" alt="FunTech" className="footer-logo" />
+            <img src="/logo.png" alt="Funtek" className="footer-logo" />
             <p>Accesorios tecnológicos de calidad para tu día a día.</p>
           </div>
           <div className="footer-links">
@@ -671,7 +671,7 @@ function Catalogo({ agregarAlCarrito, productosIniciales }) {
             </div>
             <div className="footer-col">
               <h4>Contacto</h4>
-              <a href="https://instagram.com/funtechstore" target="_blank" rel="noreferrer"
+              <a href="https://instagram.com/funtekstore" target="_blank" rel="noreferrer"
                 style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -680,13 +680,13 @@ function Catalogo({ agregarAlCarrito, productosIniciales }) {
                 </svg>
                 Instagram
               </a>
-              <a href="mailto:funtechstore1@gmail.com"
+              <a href="mailto:funtekstore@gmail.com"
                 style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="4" width="20" height="16" rx="2" />
                   <polyline points="2,4 12,13 22,4" />
                 </svg>
-                funtechstore1@gmail.com
+                funtekstore@gmail.com
               </a>
               <a href="https://wa.me/5493412682820" target="_blank" rel="noreferrer"
                 style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
@@ -699,7 +699,7 @@ function Catalogo({ agregarAlCarrito, productosIniciales }) {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© 2026 FunTech · Todos los derechos reservados.</p>
+          <p>© 2026 Funtek · Todos los derechos reservados.</p>
         </div>
       </footer>
     </div>

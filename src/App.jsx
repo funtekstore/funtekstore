@@ -134,7 +134,7 @@ function App() {
                 {menuAbierto ? <IconClose /> : <IconMenu />}
               </button>
               <a href="/" className="navbar-logo">
-                <img src="/logo.svg" alt="FunTech" className="logo" />
+                <img src="/logo.svg" alt="Funtek" className="logo" />
               </a>
             </div>
 
@@ -563,7 +563,7 @@ function App() {
                           if (envioSeleccionado?.id === "retiro") {
                             const resumen = carrito.map(i => `• ${i.nombre} x${i.cantidad} - $${i.precio * i.cantidad}`).join("\n");
                             const msg = encodeURIComponent(
-                              `Hola FunTech! Quiero coordinar el retiro en persona de mi pedido.\n\nMi pedido:\n${resumen}\n\nTotal: $${total}\n\nNombre: ${nombreCliente}\nEmail: ${emailCliente}`
+                              `Hola Funtek! Quiero coordinar el retiro en persona de mi pedido.\n\nMi pedido:\n${resumen}\n\nTotal: $${total}\n\nNombre: ${nombreCliente}\nEmail: ${emailCliente}`
                             );
                             window.open(`https://wa.me/5493412682820?text=${msg}`, "_blank");
                           }
@@ -593,7 +593,7 @@ function App() {
                         if (data.ok) {
                           const resumen = carrito.map(i => `• ${i.nombre} x${i.cantidad} - $${i.precio * i.cantidad}`).join("\n");
                           const msg = encodeURIComponent(
-                            `Hola FunTech! Quiero pagar en efectivo.\n\nMi pedido:\n${resumen}\n\nTotal: $${total}\n\nNombre: ${nombreCliente}\nEmail: ${emailCliente}`
+                            `Hola Funtek! Quiero pagar en efectivo.\n\nMi pedido:\n${resumen}\n\nTotal: $${total}\n\nNombre: ${nombreCliente}\nEmail: ${emailCliente}`
                           );
                           setCarrito([]); setModalPagoAbierto(false);
                           window.open(`https://wa.me/5493412682820?text=${msg}`, "_blank");
@@ -635,7 +635,7 @@ function App() {
             </div>
             <div className="hero-image">
               <div className="hero-image-wrapper">
-                <img src="https://res.cloudinary.com/funtechstore/image/upload/8fbb1af110be2df1ecee1203ca2028c5_ckzddf.jpg" alt="Accesorios tech" />
+                <img src="https://res.cloudinary.com/funtek/image/upload/8fbb1af110be2df1ecee1203ca2028c5_ckzddf.jpg" alt="Accesorios tech" />
               </div>
             </div>
           </section>
@@ -651,13 +651,13 @@ function App() {
             <div className="categorias-grid">
               {Object.keys(listaProductos).map((cat) => {
                 const imagenesCat = {
-                  fundas: "https://res.cloudinary.com/funtechstore/image/upload/fundas_gkjqnr.png",
-                  cargadores: "https://res.cloudinary.com/funtechstore/image/upload/cargadores_d4zq27.png",
-                  auriculares: "https://res.cloudinary.com/funtechstore/image/upload/auriculares_tnviux.png",
-                  cables: "https://res.cloudinary.com/funtechstore/image/upload/cables_noqluy.png",
-                  "micrófonos": "https://res.cloudinary.com/funtechstore/image/upload/microfonos_vp5fdy.png",
-                  protectores: "https://res.cloudinary.com/funtechstore/image/upload/protectores_qe5qcm.png",
-                  parlantes: "https://res.cloudinary.com/funtechstore/image/upload/parlantes_aseife.png",
+                  fundas: "https://res.cloudinary.com/funtek/image/upload/fundas_gkjqnr.png",
+                  cargadores: "https://res.cloudinary.com/funtek/image/upload/cargadores_d4zq27.png",
+                  auriculares: "https://res.cloudinary.com/funtek/image/upload/auriculares_tnviux.png",
+                  cables: "https://res.cloudinary.com/funtek/image/upload/cables_noqluy.png",
+                  "micrófonos": "https://res.cloudinary.com/funtek/image/upload/microfonos_vp5fdy.png",
+                  protectores: "https://res.cloudinary.com/funtek/image/upload/protectores_qe5qcm.png",
+                  parlantes: "https://res.cloudinary.com/funtek/image/upload/parlantes_aseife.png",
                 };
                 const imgSrc = imagenesCat[cat.toLowerCase()] || listaProductos[cat][0]?.imagen;
                 return (
@@ -857,22 +857,22 @@ function App() {
               )}
 
               <div style={{ marginTop: "36px", display: "flex", gap: "24px", flexWrap: "wrap" }}>
-                <a href="https://instagram.com/funtechstore" target="_blank" rel="noreferrer"
+                <a href="https://instagram.com/funtekstore" target="_blank" rel="noreferrer"
                   style={{ color: "#555", fontSize: "14px", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="2" width="20" height="20" rx="5" />
                     <circle cx="12" cy="12" r="4.5" />
                     <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none" />
                   </svg>
-                  @funtechstore
+                  @funtekstore
                 </a>
-                <a href="mailto:funtechstore1@gmail.com"
+                <a href="mailto:funtekstore@gmail.com"
                   style={{ color: "#555", fontSize: "14px", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="4" width="20" height="16" rx="2" />
                     <polyline points="2,4 12,13 22,4" />
                   </svg>
-                  funtechstore1@gmail.com
+                  funtekstore@gmail.com
                 </a>
                 <a href="https://wa.me/5493412682820" target="_blank" rel="noreferrer"
                   style={{ color: "#555", fontSize: "14px", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
@@ -889,7 +889,7 @@ function App() {
           <footer className="footer">
             <div className="footer-inner">
               <div className="footer-brand">
-                <img src="/logo.png" alt="FunTech" className="footer-logo" />
+                <img src="/logo.png" alt="Funtek" className="footer-logo" />
                 <p>Accesorios tecnológicos de calidad para tu día a día.</p>
               </div>
               <div className="footer-links">
@@ -906,7 +906,7 @@ function App() {
                 </div>
                 <div className="footer-col">
                   <h4>Contacto</h4>
-                  <a href="https://instagram.com/funtechstore" target="_blank" rel="noreferrer"
+                  <a href="https://instagram.com/funtekstore" target="_blank" rel="noreferrer"
                     style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -915,13 +915,13 @@ function App() {
                     </svg>
                     Instagram
                   </a>
-                  <a href="mailto:funtechstore1@gmail.com"
+                  <a href="mailto:funtekstore@gmail.com"
                     style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="4" width="20" height="16" rx="2" />
                       <polyline points="2,4 12,13 22,4" />
                     </svg>
-                    funtechstore1@gmail.com
+                    funtekstore@gmail.com
                   </a>
                   <a href="https://wa.me/5493412682820" target="_blank" rel="noreferrer"
                     style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
@@ -934,7 +934,7 @@ function App() {
               </div>
             </div>
             <div className="footer-bottom">
-              <p>© 2026 FunTech · Todos los derechos reservados.</p>
+              <p>© 2026 Funtek · Todos los derechos reservados.</p>
             </div>
           </footer>
 

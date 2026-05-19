@@ -164,7 +164,7 @@ app.delete("/productos/categoria/:nombre", isAdmin, async (req, res) => {
 
 // Ruta de prueba
 app.get("/", (req, res) => {
-  res.send("Servidor FunTech funcionando 🚀");
+  res.send("Servidor Funtek funcionando 🚀");
 });
 
 // Tabla de precios de envío por zona

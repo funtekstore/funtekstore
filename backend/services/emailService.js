@@ -10,7 +10,7 @@ const emailBase = (contenido) => `
 
       <!-- HEADER -->
       <div style="background: #111; padding: 32px 40px; text-align: center;">
-        <h1 style="font-size: 30px; color: white; margin: 0; letter-spacing: -0.5px;">FunTech</h1>
+        <h1 style="font-size: 30px; color: white; margin: 0; letter-spacing: -0.5px;">Funtek</h1>
         <div style="background: #ffd000; height: 3px; width: 48px; margin: 10px auto 0; border-radius: 2px;"></div>
       </div>
 
@@ -21,7 +21,7 @@ const emailBase = (contenido) => `
 
       <!-- FOOTER -->
       <div style="border-top: 1px solid #f0f0f0; padding: 24px 40px; text-align: center;">
-        <p style="margin: 0; color: #bbb; font-size: 12px; letter-spacing: 0.3px;">FunTech · Accesorios premium para tu celular</p>
+        <p style="margin: 0; color: #bbb; font-size: 12px; letter-spacing: 0.3px;">Funtek · Accesorios premium para tu celular</p>
       </div>
 
     </div>
@@ -76,7 +76,7 @@ export const enviarEmailConfirmacion = async (email, nombre, items, total, metod
         <table style="width: 100%; border-collapse: collapse;">
           <tr>
             <td style="font-size: 13px; color: #888; padding: 4px 0; width: 80px;">Alias</td>
-            <td style="font-size: 13px; font-weight: 700; color: #111; padding: 4px 0;">funtech.store</td>
+            <td style="font-size: 13px; font-weight: 700; color: #111; padding: 4px 0;">funtek.store</td>
           </tr>
           <tr>
             <td style="font-size: 13px; color: #888; padding: 4px 0;">CBU</td>
@@ -110,9 +110,9 @@ export const enviarEmailConfirmacion = async (email, nombre, items, total, metod
   };
 
   await resend.emails.send({
-    from: "FunTech <onboarding@resend.dev>",
+    from: "Funtek <onboarding@resend.dev>",
     to: email,
-    subject: "Confirmación de pedido — FunTech",
+    subject: "Confirmación de pedido — Funtek",
     html: emailBase(`
       <p style="font-size: 13px; color: #aaa; margin: 0 0 16px;">
         ${badge("Pedido recibido", "#f4f4f4", "#555")}
@@ -135,9 +135,9 @@ export const enviarEmailConfirmacion = async (email, nombre, items, total, metod
 
 export const enviarEmailEnviado = async (email, nombre) => {
   await resend.emails.send({
-    from: "FunTech <onboarding@resend.dev>",
+    from: "Funtek <onboarding@resend.dev>",
     to: email,
-    subject: "Tu pedido está en camino — FunTech",
+    subject: "Tu pedido está en camino — Funtek",
     html: emailBase(`
       <p style="font-size: 13px; color: #aaa; margin: 0 0 16px;">
         ${badge("En camino", "#cce5ff", "#004085")}
@@ -156,9 +156,9 @@ export const enviarEmailEnviado = async (email, nombre) => {
 
 export const enviarEmailEntregado = async (email, nombre) => {
   await resend.emails.send({
-    from: "FunTech <onboarding@resend.dev>",
+    from: "Funtek <onboarding@resend.dev>",
     to: email,
-    subject: "Pedido entregado — FunTech",
+    subject: "Pedido entregado — Funtek",
     html: emailBase(`
       <p style="font-size: 13px; color: #aaa; margin: 0 0 16px;">
         ${badge("Entregado", "#d4edda", "#155724")}
@@ -180,9 +180,9 @@ export const enviarEmailEntregado = async (email, nombre) => {
 
 export async function enviarEmailContacto(nombre, emailRemitente, mensaje) {
   await resend.emails.send({
-    from: "FunTech Store <onboarding@resend.dev>",
-    to: "funtechstore1@gmail.com",
-    subject: `Nuevo mensaje de ${nombre} — FunTech`,
+    from: "Funtek Store <onboarding@resend.dev>",
+    to: "funtekstore@gmail.com",
+    subject: `Nuevo mensaje de ${nombre} — Funtek`,
     html: emailBase(`
       <p style="font-size: 13px; color: #aaa; margin: 0 0 16px;">
         ${badge("Consulta entrante", "#f4f4f4", "#555")}
@@ -212,9 +212,9 @@ export async function enviarEmailContacto(nombre, emailRemitente, mensaje) {
 
 export const enviarEmailBienvenida = async (email, nombre) => {
   await resend.emails.send({
-    from: "FunTech <onboarding@resend.dev>",
+    from: "Funtek <onboarding@resend.dev>",
     to: email,
-    subject: "¡Bienvenido a FunTech! 🎉",
+    subject: "¡Bienvenido a Funtek! 🎉",
     html: emailBase(`
       <p style="font-size: 13px; color: #aaa; margin: 0 0 16px;">
         ${badge("Cuenta creada", "#f0fdf4", "#15803d")}
@@ -241,9 +241,9 @@ export const enviarEmailBienvenida = async (email, nombre) => {
 export const enviarEmailResetPassword = async (email, nombre, token) => {
   const link = `http://localhost:5173/reset-password?token=${token}`;
   await resend.emails.send({
-    from: "FunTech <onboarding@resend.dev>",
+    from: "Funtek <onboarding@resend.dev>",
     to: email,
-    subject: "Restablecer contraseña — FunTech",
+    subject: "Restablecer contraseña — Funtek",
     html: emailBase(`
       <p style="font-size: 13px; color: #aaa; margin: 0 0 16px;">
         ${badge("Seguridad", "#f4f4f4", "#555")}

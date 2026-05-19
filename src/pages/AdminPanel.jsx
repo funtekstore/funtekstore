@@ -608,7 +608,7 @@ function AdminPanel() {
       {/* HEADER */}
       <header className="admin-header">
         <div className="admin-header-left">
-          <img src="/logo.svg" alt="FunTech" style={{ height: "52px", filter: "brightness(0) invert(1)" }} />
+          <img src="/logo.svg" alt="Funtek" style={{ height: "52px", filter: "brightness(0) invert(1)" }} />
           <span className="admin-badge">Admin</span>
         </div>
         <div className="admin-header-right">

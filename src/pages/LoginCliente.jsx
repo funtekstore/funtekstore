@@ -291,14 +291,14 @@ function LoginCliente() {
       {/* IZQUIERDA */}
       <div className="auth-left">
         <div className="auth-left-logo">
-          <img src="/logo.svg" alt="FunTech" />
+          <img src="/logo.svg" alt="Funtek" />
         </div>
         <div className="auth-left-content">
           <span className="auth-left-tag">Bienvenido</span>
           <h2 className="auth-left-title">Tu tienda tech<br />favorita te <em>espera</em></h2>
           <p className="auth-left-desc">Ingresá a tu cuenta para ver tus pedidos, guardar favoritos y comprar más rápido.</p>
         </div>
-        <div className="auth-left-footer">© 2026 FunTech Store</div>
+        <div className="auth-left-footer">© 2026 Funtek Store</div>
       </div>
 
       {/* DERECHA */}

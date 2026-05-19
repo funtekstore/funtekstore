@@ -35,7 +35,7 @@ function PagoExitoso() {
           ¡Pago aprobado!
         </h1>
         <p style={{ color: "#888", fontSize: "15px", lineHeight: 1.6, margin: "0 0 36px" }}>
-          Gracias por tu compra en FunTech. Te enviamos un email con los detalles del pedido.
+          Gracias por tu compra en Funtek. Te enviamos un email con los detalles del pedido.
         </p>
 
         <div style={{ display: "flex", gap: "12px", flexDirection: "column" }}>

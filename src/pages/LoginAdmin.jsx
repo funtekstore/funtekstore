@@ -129,14 +129,14 @@ function LoginAdmin() {
       {/* IZQUIERDA */}
       <div className="auth-left">
         <div className="auth-left-logo">
-          <img src="/logo.svg" alt="FunTech" />
+          <img src="/logo.svg" alt="Funtek" />
         </div>
         <div className="auth-left-content">
           <span className="auth-left-tag">Acceso restringido</span>
           <h2 className="auth-left-title">Panel de<br /><em>administración</em></h2>
           <p className="auth-left-desc">Gestioná pedidos, productos y clientes desde un solo lugar. Solo para administradores.</p>
         </div>
-        <div className="auth-left-footer">© 2026 FunTech Store</div>
+        <div className="auth-left-footer">© 2026 Funtek Store</div>
       </div>
 
       {/* DERECHA */}

@@ -175,7 +175,7 @@ function DetalleProducto({ agregarAlCarrito }) {
         justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100,
         boxShadow: "0 1px 12px rgba(0,0,0,0.04)"
       }}>
-        <img src="/logo.svg" alt="FunTech" style={{ height: "38px" }} />
+        <img src="/logo.svg" alt="Funtek" style={{ height: "38px" }} />
         <button onClick={() => navigate("/")}
           style={{
             background: "none", border: "1.5px solid #e8e8e8", cursor: "pointer",
