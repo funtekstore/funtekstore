@@ -278,9 +278,9 @@ app.post("/crear-preferencia", async (req, res) => {
       external_reference: externalRef,
       notification_url: "https://monserrate-unrepented-noncreditably.ngrok-free.dev/webhook",
       back_urls: {
-        success: "http://localhost:5173/pago-exitoso",
-        failure: "http://localhost:5173/pago-fallido",
-        pending: "http://localhost:5173/pago-pendiente"
+        success: "https://funktekstore.com.ar/pago-exitoso",
+        failure: "https://funktekstore.com.ar/pago-fallido",
+        pending: "https://funktekstore.com.ar/pago-pendiente"
       }
     };
 

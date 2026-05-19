@@ -168,7 +168,7 @@ export const enviarEmailEntregado = async (email, nombre) => {
 
       <div style="background: #f9f9f9; border-radius: 12px; padding: 24px; text-align: center;">
         <p style="margin: 0 0 18px; font-size: 14px; color: #555;">¿Te gustó tu compra? Dejanos una reseña en la tienda.</p>
-        <a href="http://localhost:5173" style="background: #111; color: #ffd000; padding: 13px 32px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.3px;">
+        <a href="https://funtechstore.vercel.app" style="background: #111; color: #ffd000; padding: 13px 32px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.3px;">
           Ir a la tienda
         </a>
       </div>
@@ -224,13 +224,13 @@ export const enviarEmailBienvenida = async (email, nombre) => {
 
       <div style="background: #f9f9f9; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 24px;">
         <p style="margin: 0 0 18px; font-size: 14px; color: #555; line-height: 1.6;">Accesorios premium para tu celular, con los mejores precios y envíos a todo el país.</p>
-        <a href="http://localhost:5173" style="background: #ffd000; color: #111; padding: 13px 32px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.3px;">
+        <a href="https://funtechstore.vercel.app" style="background: #ffd000; color: #111; padding: 13px 32px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.3px;">
           Ver productos
         </a>
       </div>
 
       <div style="border-top: 1px solid #f0f0f0; padding-top: 20px;">
-        <p style="font-size: 13px; color: #aaa; margin: 0; text-align: center;">¿Tenés alguna consulta? Escribinos por <a href="https://wa.me/5493412682820" style="color: #111; font-weight: 700; text-decoration: none;">WhatsApp</a> o <a href="https://instagram.com/fun.tech.store" style="color: #111; font-weight: 700; text-decoration: none;">Instagram</a></p>
+        <p style="font-size: 13px; color: #aaa; margin: 0; text-align: center;">¿Tenés alguna consulta? Escribinos por <a href="https://wa.me/5493412682820" style="color: #111; font-weight: 700; text-decoration: none;">WhatsApp</a> o <a href="https://instagram.com/funktekstore" style="color: #111; font-weight: 700; text-decoration: none;">Instagram</a></p>
       </div>
     `)
   });
@@ -239,7 +239,7 @@ export const enviarEmailBienvenida = async (email, nombre) => {
 // ─── RESET DE CONTRASEÑA ──────────────────────────────────────────────────────
 
 export const enviarEmailResetPassword = async (email, nombre, token) => {
-  const link = `http://localhost:5173/reset-password?token=${token}`;
+  const link = `https://funtechstore.vercel.app/reset-password?token=${token}`;
   await resend.emails.send({
     from: "Funtek <onboarding@resend.dev>",
     to: email,
