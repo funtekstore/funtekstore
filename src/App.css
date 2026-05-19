@@ -269,15 +269,11 @@ body {
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.4);
   display: flex;
   justify-content: flex-end;
   z-index: 1000;
-  animation: overlayFadeIn 0.2s ease;
-}
-@keyframes overlayFadeIn {
-  from { background: rgba(0,0,0,0); }
-  to   { background: rgba(0,0,0,0.45); }
+  backdrop-filter: blur(2px);
 }
 .carrito-lateral {
   width: 380px;
@@ -287,15 +283,10 @@ body {
   padding: 28px 24px;
   display: flex;
   flex-direction: column;
+  animation: slideIn 0.25s ease;
   overflow-y: auto;
-  animation: slideIn 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: -8px 0 40px rgba(0,0,0,0.12);
-  will-change: transform;
 }
-@keyframes slideIn {
-  from { transform: translateX(100%); }
-  to   { transform: translateX(0); }
-}
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
 .carrito-header {
   display: flex;
