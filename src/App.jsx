@@ -705,7 +705,7 @@ function App() {
             <img
               src="https://res.cloudinary.com/funtek/image/upload/bannerfuntek_dgvvey.webp"
               alt="Banner Funtek"
-              style={{ width: "100%", borderRadius: "20px", display: "block", cursor: "pointer" }}
+              style={{ width: "80%", borderRadius: "20px", display: "block", cursor: "pointer", margin: "0 auto" }}
               onClick={() => navigate("/catalogo")}
             />
           </div>
