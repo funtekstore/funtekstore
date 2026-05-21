@@ -700,6 +700,16 @@ function App() {
             )}
           </div>
 
+          {/* BANNER */}
+          <div style={{ padding: "0 40px", marginBottom: "20px" }}>
+            <img
+              src="https://res.cloudinary.com/funtek/image/upload/bannerfuntek_dgvvey.webp"
+              alt="Banner Funtek"
+              style={{ width: "100%", borderRadius: "20px", display: "block", cursor: "pointer" }}
+              onClick={() => navigate("/catalogo")}
+            />
+          </div>
+
           {/* PRODUCTOS */}
           <section id="productos">
             {Object.entries(listaProductos)
