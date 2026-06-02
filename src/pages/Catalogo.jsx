@@ -157,7 +157,7 @@ function Catalogo({ agregarAlCarrito, productosIniciales }) {
         justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100,
         boxShadow: "0 1px 12px rgba(0,0,0,0.04)"
       }}>
-        <img src="/logo.png" alt="Funtek" style={{ height: "60px", cursor: "pointer" }} onClick={() => navigate("/")} />
+        <img src="/logo.png" alt="Funtek" style={{ height: "80px", cursor: "pointer" }} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <button onClick={() => navigate("/")}
             style={{

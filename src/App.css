@@ -47,7 +47,7 @@ body {
 }
 
 .navbar-logo { display: flex; align-items: center; }
-.logo { height: 60px; }
+.logo { height: 80px; }
 
 .navbar-center {
   display: flex;
