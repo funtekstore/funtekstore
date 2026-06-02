@@ -676,30 +676,6 @@ function App() {
             </div>
           </section>
 
-          {/* FILTROS */}
-          <div className="filtros-barra">
-            <div className="filtros-grupo">
-              <span className="filtros-label">Precio</span>
-              <input type="number" placeholder="Mín" value={precioMin} onChange={(e) => setPrecioMin(e.target.value)} className="filtro-input" />
-              <span className="filtros-sep">—</span>
-              <input type="number" placeholder="Máx" value={precioMax} onChange={(e) => setPrecioMax(e.target.value)} className="filtro-input" />
-            </div>
-            <div className="filtros-grupo">
-              <span className="filtros-label">Marca</span>
-              <select value={marcaSeleccionada} onChange={(e) => setMarcaSeleccionada(e.target.value)} className="filtro-select">
-                <option value="">Todas</option>
-                {[...new Set(Object.values(listaProductos).flat().map(p => p.marca).filter(Boolean))].map((marca, i) => (
-                  <option key={i} value={marca}>{marca}</option>
-                ))}
-              </select>
-            </div>
-            {(precioMin || precioMax || marcaSeleccionada || categoriaSeleccionada) && (
-              <button className="filtros-limpiar" onClick={() => { setPrecioMin(""); setPrecioMax(""); setMarcaSeleccionada(""); setCategoriaSeleccionada(null); }}>
-                Limpiar filtros
-              </button>
-            )}
-          </div>
-
           {/* BANNER */}
           <div style={{ padding: "0 40px", marginBottom: "20px" }}>
             <img
