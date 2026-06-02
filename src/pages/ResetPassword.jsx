@@ -125,7 +125,7 @@ function ResetPassword() {
       {/* IZQUIERDA */}
       <div className="auth-left">
         <div className="auth-left-logo">
-          <img src="/logo.svg" alt="Funtek" />
+          <img src="/logo.png" alt="Funtek" />
         </div>
         <div className="auth-left-content">
           <span className="auth-left-tag">Seguridad</span>

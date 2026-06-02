@@ -157,7 +157,7 @@ function Catalogo({ agregarAlCarrito, productosIniciales }) {
         justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100,
         boxShadow: "0 1px 12px rgba(0,0,0,0.04)"
       }}>
-        <img src="/logo.svg" alt="Funtek" style={{ height: "60px", cursor: "pointer" }} onClick={() => navigate("/")} />
+        <img src="/logo.png" alt="Funtek" style={{ height: "60px", cursor: "pointer" }} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <button onClick={() => navigate("/")}
             style={{
@@ -654,7 +654,7 @@ function Catalogo({ agregarAlCarrito, productosIniciales }) {
       <footer className="footer">
         <div className="footer-inner">
           <div className="footer-brand">
-            <img src="/logo.png" alt="Funtek" className="footer-logo" />
+            <img src="/logo_footer.png" alt="Funtek" className="footer-logo" />
             <p>Accesorios tecnológicos de calidad para tu día a día.</p>
           </div>
           <div className="footer-links">

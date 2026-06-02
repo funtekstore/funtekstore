@@ -134,7 +134,7 @@ function App() {
                 {menuAbierto ? <IconClose /> : <IconMenu />}
               </button>
               <a href="/" className="navbar-logo">
-                <img src="/logo.svg" alt="Funtek" className="logo" />
+                <img src="/logo.png" alt="Funtek" className="logo" />
               </a>
             </div>
 
@@ -875,7 +875,7 @@ function App() {
           <footer className="footer">
             <div className="footer-inner">
               <div className="footer-brand">
-                <img src="/logo.png" alt="Funtek" className="footer-logo" />
+                <img src="/logo_footer.png" alt="Funtek" className="footer-logo" />
                 <p>Accesorios tecnológicos de calidad para tu día a día.</p>
               </div>
               <div className="footer-links">
