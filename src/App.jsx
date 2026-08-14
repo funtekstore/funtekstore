@@ -37,15 +37,6 @@ function App() {
   const [contactoMensaje, setContactoMensaje] = useState("");
   const [contactoEnviado, setContactoEnviado] = useState(false);
   const [contactoCargando, setContactoCargando] = useState(false);
-  const [modalPagoAbierto, setModalPagoAbierto] = useState(false);
-  const [metodoPago, setMetodoPago] = useState(null);
-  const [datosPendientes, setDatosPendientes] = useState(null); // { emailCliente, nombreCliente }
-  const [procesandoPago, setProcesandoPago] = useState(false);
-  const [codigoPostal, setCodigoPostal] = useState("");
-  const [opcionesEnvio, setOpcionesEnvio] = useState(null);
-  const [envioSeleccionado, setEnvioSeleccionado] = useState(null);
-  const [cotizandoEnvio, setCotizandoEnvio] = useState(false);
-  const [errorEnvio, setErrorEnvio] = useState("");
 
   const productosMenuTimer = useRef(null);
   const usuarioMenuTimer = useRef(null);
@@ -302,320 +293,16 @@ function App() {
                       <span className="carrito-total-monto">${total}</span>
                     </div>
                     <button className="btn-checkout" onClick={() => {
-                      let emailCliente = null, nombreCliente = null;
-                      if (clienteLogueado) {
-                        emailCliente = localStorage.getItem("clienteEmail");
-                        nombreCliente = localStorage.getItem("clienteNombre");
-                      } else {
-                        nombreCliente = prompt("Ingresá tu nombre:");
-                        emailCliente = prompt("Ingresá tu email:");
-                        if (!nombreCliente || !emailCliente) { alert("Necesitamos tus datos para continuar"); return; }
-                      }
-                      setDatosPendientes({ emailCliente, nombreCliente });
-                      setMetodoPago(null);
-                      setCodigoPostal("");
-                      setOpcionesEnvio(null);
-                      setEnvioSeleccionado(null);
-                      setErrorEnvio("");
+                      const nombre = clienteLogueado ? localStorage.getItem("clienteNombre") : "";
+                      const resumen = carrito.map(i => `• ${i.nombre}${i.variantesElegidas && Object.keys(i.variantesElegidas).length > 0 ? " (" + Object.entries(i.variantesElegidas).map(([k,v]) => `${k}: ${v}`).join(", ") + ")" : ""} x${i.cantidad} — $${(i.precio * i.cantidad).toLocaleString("es-AR")}`).join("\n");
+                      const msg = encodeURIComponent(`Hola FunTech! Quiero hacer un pedido 🛒\n\n${resumen}\n\nTotal: $${total.toLocaleString("es-AR")}${nombre ? `\n\nNombre: ${nombre}` : ""}`);
                       setCarritoAbierto(false);
-                      setModalPagoAbierto(true);
+                      window.open(`https://wa.me/5493412682820?text=${msg}`, "_blank");
                     }}>
                       Finalizar compra
                     </button>
                   </div>
                 )}
-              </div>
-            </div>
-          )}
-
-          {/* MODAL MÉTODOS DE PAGO */}
-          {modalPagoAbierto && (
-            <div style={{
-              position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)",
-              zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center",
-              padding: "20px", backdropFilter: "blur(4px)"
-            }} onClick={() => setModalPagoAbierto(false)}>
-              <div style={{
-                background: "white", borderRadius: "24px", padding: "40px",
-                width: "100%", maxWidth: "480px", boxShadow: "0 30px 80px rgba(0,0,0,0.25)",
-                animation: "fadeUp 0.3s ease", maxHeight: "90vh", overflowY: "auto"
-              }} onClick={e => e.stopPropagation()}>
-
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
-                  <h2 style={{ fontSize: "22px", fontWeight: "700", margin: 0 }}>Elegí cómo pagar</h2>
-                  <button onClick={() => setModalPagoAbierto(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "#aaa", padding: "4px" }}>
-                    <IconClose />
-                  </button>
-                </div>
-                <p style={{ color: "#999", fontSize: "14px", marginBottom: "28px" }}>
-                  Total productos: <strong style={{ color: "#111" }}>${total}</strong>
-                  {envioSeleccionado && envioSeleccionado.precio > 0 && (
-                    <span> + <strong style={{ color: "#111" }}>${envioSeleccionado.precio}</strong> envío</span>
-                  )}
-                </p>
-
-                {/* Opciones de pago */}
-                {[
-                  {
-                    id: "mercadopago", label: "MercadoPago", desc: "Pagá con tu cuenta MP o tarjeta",
-                    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20" /><path d="M6 15h4" /><path d="M14 15h2" /></svg>
-                  },
-                  {
-                    id: "transferencia", label: "Transferencia bancaria", desc: "Te enviamos el CBU por email",
-                    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /><path d="M9 22V12h6v10" /></svg>
-                  },
-                  {
-                    id: "tarjeta", label: "Tarjeta de crédito / débito", desc: "Procesado por MercadoPago",
-                    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20" /><circle cx="7" cy="15.5" r="1" fill="currentColor" stroke="none" /><circle cx="10.5" cy="15.5" r="1" fill="currentColor" stroke="none" /></svg>
-                  },
-                  {
-                    id: "efectivo", label: "Efectivo", desc: "Coordinamos el encuentro por WhatsApp",
-                    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
-                  },
-                ].map(op => (
-                  <div key={op.id} onClick={() => {
-                    setMetodoPago(op.id);
-                    setOpcionesEnvio(null);
-                    setEnvioSeleccionado(null);
-                    setCodigoPostal("");
-                    setErrorEnvio("");
-                  }} style={{
-                    border: `2px solid ${metodoPago === op.id ? "#111" : "#eee"}`,
-                    borderRadius: "14px", padding: "16px 18px", marginBottom: "10px",
-                    cursor: "pointer", display: "flex", alignItems: "center", gap: "16px",
-                    background: metodoPago === op.id ? "#fafafa" : "white", transition: "all 0.15s"
-                  }}>
-                    <div style={{
-                      width: "44px", height: "44px", borderRadius: "12px", flexShrink: 0,
-                      background: metodoPago === op.id ? "#111" : "#f4f4f4",
-                      color: metodoPago === op.id ? "#ffd000" : "#555",
-                      display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s"
-                    }}>{op.icon}</div>
-                    <div style={{ flex: 1 }}>
-                      <p style={{ margin: 0, fontWeight: "700", fontSize: "15px", color: "#111" }}>{op.label}</p>
-                      <p style={{ margin: "3px 0 0", fontSize: "13px", color: "#aaa" }}>{op.desc}</p>
-                    </div>
-                    <div style={{
-                      width: "20px", height: "20px", borderRadius: "50%", flexShrink: 0,
-                      border: `2px solid ${metodoPago === op.id ? "#111" : "#ddd"}`,
-                      background: metodoPago === op.id ? "#111" : "white",
-                      transition: "all 0.15s", display: "flex", alignItems: "center", justifyContent: "center"
-                    }}>
-                      {metodoPago === op.id && <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ffd000" }} />}
-                    </div>
-                  </div>
-                ))}
-
-                {/* SECCIÓN ENVÍO — solo para MP y tarjeta */}
-                {(metodoPago === "mercadopago" || metodoPago === "tarjeta") && (
-                  <div style={{ marginTop: "20px", padding: "20px", background: "#fafafa", borderRadius: "14px" }}>
-                    <p style={{ margin: "0 0 12px", fontSize: "12px", fontWeight: "700", color: "#aaa", textTransform: "uppercase", letterSpacing: "0.8px" }}>
-                      Envío
-                    </p>
-
-                    {/* Input + botón cotizar */}
-                    <div style={{ display: "flex", gap: "10px" }}>
-                      <input
-                        type="text"
-                        placeholder="Ingresá tu código postal"
-                        value={codigoPostal}
-                        onChange={e => { setCodigoPostal(e.target.value); setErrorEnvio(""); }}
-                        maxLength={8}
-                        onKeyDown={async e => {
-                          if (e.key !== "Enter" || codigoPostal.length < 4) return;
-                          setCotizandoEnvio(true); setErrorEnvio(""); setOpcionesEnvio(null); setEnvioSeleccionado(null);
-                          try {
-                            const res = await fetch("http://localhost:3000/cotizar-envio", {
-                              method: "POST", headers: { "Content-Type": "application/json" },
-                              body: JSON.stringify({ codigoPostalDestino: codigoPostal, items: carrito })
-                            });
-                            const data = await res.json();
-                            if (data.opciones?.length > 0) setOpcionesEnvio(data.opciones);
-                            else setErrorEnvio("No hay opciones de envío para ese código postal");
-                          } catch { setErrorEnvio("Error al cotizar, intentá de nuevo"); }
-                          finally { setCotizandoEnvio(false); }
-                        }}
-                        style={{
-                          flex: 1, padding: "11px 14px", borderRadius: "10px",
-                          border: "1.5px solid #e8e8e8", fontSize: "14px",
-                          outline: "none", fontFamily: "inherit", transition: "border-color 0.2s"
-                        }}
-                        onFocus={e => e.target.style.borderColor = "#111"}
-                        onBlur={e => e.target.style.borderColor = "#e8e8e8"}
-                      />
-                      <button
-                        onClick={async () => {
-                          if (codigoPostal.length < 4) { setErrorEnvio("Ingresá un código postal válido"); return; }
-                          setCotizandoEnvio(true); setErrorEnvio(""); setOpcionesEnvio(null); setEnvioSeleccionado(null);
-                          try {
-                            const res = await fetch("http://localhost:3000/cotizar-envio", {
-                              method: "POST", headers: { "Content-Type": "application/json" },
-                              body: JSON.stringify({ codigoPostalDestino: codigoPostal, items: carrito })
-                            });
-                            const data = await res.json();
-                            if (data.opciones?.length > 0) setOpcionesEnvio(data.opciones);
-                            else setErrorEnvio("No hay opciones de envío para ese código postal");
-                          } catch { setErrorEnvio("Error al cotizar, intentá de nuevo"); }
-                          finally { setCotizandoEnvio(false); }
-                        }}
-                        disabled={cotizandoEnvio}
-                        style={{
-                          padding: "11px 16px", background: "#111", color: "#ffd000",
-                          border: "none", borderRadius: "10px", fontWeight: "700",
-                          fontSize: "13px", cursor: cotizandoEnvio ? "not-allowed" : "pointer",
-                          opacity: cotizandoEnvio ? 0.7 : 1, whiteSpace: "nowrap", fontFamily: "inherit"
-                        }}
-                      >
-                        {cotizandoEnvio ? "Buscando..." : "Cotizar"}
-                      </button>
-                    </div>
-
-                    {errorEnvio && (
-                      <p style={{ margin: "8px 0 0", fontSize: "12px", color: "#dc2626" }}>{errorEnvio}</p>
-                    )}
-
-                    {/* Opciones cotizadas */}
-                    {opcionesEnvio && (
-                      <div style={{ marginTop: "14px", display: "flex", flexDirection: "column", gap: "8px" }}>
-                        {opcionesEnvio.map(op => (
-                          <div key={op.id} onClick={() => setEnvioSeleccionado(op)} style={{
-                            border: `2px solid ${envioSeleccionado?.id === op.id ? "#111" : "#e8e8e8"}`,
-                            borderRadius: "12px", padding: "12px 14px", cursor: "pointer",
-                            display: "flex", justifyContent: "space-between", alignItems: "center",
-                            background: "white", transition: "border-color 0.15s"
-                          }}>
-                            <div>
-                              <p style={{ margin: 0, fontWeight: "600", fontSize: "14px", color: "#111" }}>{op.nombre}</p>
-                              <p style={{ margin: "2px 0 0", fontSize: "12px", color: "#aaa" }}>
-                                {op.dias ? `${op.dias} días hábiles` : "Tiempo a confirmar"}
-                              </p>
-                            </div>
-                            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                              <span style={{ fontWeight: "700", fontSize: "15px", color: "#111" }}>
-                                {op.precio === 0 ? "Gratis" : `$${op.precio}`}
-                              </span>
-                              <div style={{
-                                width: "18px", height: "18px", borderRadius: "50%", flexShrink: 0,
-                                border: `2px solid ${envioSeleccionado?.id === op.id ? "#111" : "#ddd"}`,
-                                background: envioSeleccionado?.id === op.id ? "#111" : "white",
-                                display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.15s"
-                              }}>
-                                {envioSeleccionado?.id === op.id && <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#ffd000" }} />}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Retiro en persona — siempre visible */}
-                    <div onClick={() => setEnvioSeleccionado({ id: "retiro", nombre: "Retiro en persona", precio: 0 })} style={{
-                      border: `2px solid ${envioSeleccionado?.id === "retiro" ? "#111" : "#e8e8e8"}`,
-                      borderRadius: "12px", padding: "12px 14px", cursor: "pointer",
-                      display: "flex", justifyContent: "space-between", alignItems: "center",
-                      background: "white", transition: "border-color 0.15s", marginTop: "8px"
-                    }}>
-                      <div>
-                        <p style={{ margin: 0, fontWeight: "600", fontSize: "14px", color: "#111" }}>Retiro en persona</p>
-                        <p style={{ margin: "2px 0 0", fontSize: "12px", color: "#aaa" }}>Coordinamos por WhatsApp</p>
-                      </div>
-                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        <span style={{ fontWeight: "700", fontSize: "15px", color: "#111" }}>Gratis</span>
-                        <div style={{
-                          width: "18px", height: "18px", borderRadius: "50%", flexShrink: 0,
-                          border: `2px solid ${envioSeleccionado?.id === "retiro" ? "#111" : "#ddd"}`,
-                          background: envioSeleccionado?.id === "retiro" ? "#111" : "white",
-                          display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.15s"
-                        }}>
-                          {envioSeleccionado?.id === "retiro" && <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#ffd000" }} />}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Botón confirmar */}
-                <button
-                  disabled={
-                    !metodoPago || procesandoPago ||
-                    ((metodoPago === "mercadopago" || metodoPago === "tarjeta") && !envioSeleccionado)
-                  }
-                  onClick={async () => {
-                    if (!metodoPago) return;
-                    const { emailCliente, nombreCliente } = datosPendientes;
-                    setProcesandoPago(true);
-                    try {
-                      if (metodoPago === "mercadopago" || metodoPago === "tarjeta") {
-                        const envioData = envioSeleccionado ? {
-                          id: envioSeleccionado.id,
-                          nombre: envioSeleccionado.nombre,
-                          precio: envioSeleccionado.precio,
-                          codigoPostal
-                        } : null;
-                        const response = await fetch("http://localhost:3000/crear-preferencia", {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ items: carrito, email: emailCliente, nombre: nombreCliente, envio: envioData })
-                        });
-                        const data = await response.json();
-                        if (data.init_point) {
-                          // Si eligió retiro en persona, abre WhatsApp antes de ir a MP
-                          if (envioSeleccionado?.id === "retiro") {
-                            const resumen = carrito.map(i => `• ${i.nombre} x${i.cantidad} - $${i.precio * i.cantidad}`).join("\n");
-                            const msg = encodeURIComponent(
-                              `Hola Funtek! Quiero coordinar el retiro en persona de mi pedido.\n\nMi pedido:\n${resumen}\n\nTotal: $${total}\n\nNombre: ${nombreCliente}\nEmail: ${emailCliente}`
-                            );
-                            window.open(`https://wa.me/5493412682820?text=${msg}`, "_blank");
-                          }
-                          setModalPagoAbierto(false);
-                          window.location.href = data.init_point;
-                        } else { alert("Error al generar el pago"); }
-
-                      } else if (metodoPago === "transferencia") {
-                        const response = await fetch("http://localhost:3000/pedido-manual", {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ items: carrito, email: emailCliente, nombre: nombreCliente, metodoPago: "transferencia" })
-                        });
-                        const data = await response.json();
-                        if (data.ok) {
-                          setCarrito([]); setModalPagoAbierto(false);
-                          alert(`¡Pedido registrado! Te enviamos los datos bancarios a ${emailCliente} para completar la transferencia.`);
-                        } else { alert("Error al registrar el pedido"); }
-
-                      } else if (metodoPago === "efectivo") {
-                        const response = await fetch("http://localhost:3000/pedido-manual", {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ items: carrito, email: emailCliente, nombre: nombreCliente, metodoPago: "efectivo" })
-                        });
-                        const data = await response.json();
-                        if (data.ok) {
-                          const resumen = carrito.map(i => `• ${i.nombre} x${i.cantidad} - $${i.precio * i.cantidad}`).join("\n");
-                          const msg = encodeURIComponent(
-                            `Hola Funtek! Quiero pagar en efectivo.\n\nMi pedido:\n${resumen}\n\nTotal: $${total}\n\nNombre: ${nombreCliente}\nEmail: ${emailCliente}`
-                          );
-                          setCarrito([]); setModalPagoAbierto(false);
-                          window.open(`https://wa.me/5493412682820?text=${msg}`, "_blank");
-                        } else { alert("Error al registrar el pedido"); }
-                      }
-                    } catch (err) {
-                      console.error(err);
-                      alert("Error de conexión");
-                    } finally {
-                      setProcesandoPago(false);
-                    }
-                  }}
-                  style={{
-                    width: "100%", marginTop: "16px", padding: "15px",
-                    background: (!metodoPago || ((metodoPago === "mercadopago" || metodoPago === "tarjeta") && !envioSeleccionado)) ? "#e0e0e0" : "#111",
-                    color: (!metodoPago || ((metodoPago === "mercadopago" || metodoPago === "tarjeta") && !envioSeleccionado)) ? "#aaa" : "#ffd000",
-                    border: "none", borderRadius: "14px", fontSize: "15px",
-                    fontWeight: "700", cursor: "pointer", transition: "all 0.2s", fontFamily: "inherit"
-                  }}
-                >
-                  {procesandoPago ? "Procesando..." : "Confirmar pedido →"}
-                </button>
               </div>
             </div>
           )}
@@ -749,17 +436,17 @@ function App() {
               </div>
               <div className="info-card">
                 <div className="info-icon">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" /></svg>
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
                 </div>
-                <h3>Pagá seguro</h3>
-                <p>Aceptamos MercadoPago con todos sus medios de pago disponibles.</p>
+                <h3>Contactanos por WhatsApp</h3>
+                <p>Al finalizar la compra te mandamos directo a WhatsApp para coordinar el pago y el envío.</p>
               </div>
               <div className="info-card">
                 <div className="info-icon">
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
                 </div>
                 <h3>Recibí en casa</h3>
-                <p>Enviamos a todo el país. Te avisamos por email cuando sale tu pedido.</p>
+                <p>Enviamos a todo el país. Coordinamos el envío y el pago por WhatsApp.</p>
               </div>
             </div>
           </section>
